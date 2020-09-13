@@ -1,6 +1,5 @@
 
 # Loading the tidyverse
-# .... YOUR CODE FOR TASK 1 ....
 library(tidyverse)
 
 # Reading in the taxi data
@@ -9,7 +8,6 @@ taxi <- read_csv(file = "datasets/taxi.csv", header = TRUE, sep = ",")
 
 head(taxi)
 # Taking a look at the first couple of rows in taxi
-# .... YOUR CODE FOR TASK 1 ....
 
 library(testthat) 
 library(IRkernel.testthat)
@@ -65,7 +63,6 @@ run_tests({
 })
 
 # Loading in ggmap and viridis for nice colors
-# .... YOUR CODE FOR TASK 4 ....
 library(ggmap)
 library(viridis)
 
@@ -77,8 +74,7 @@ manhattan <- readRDS("datasets/manhattan.rds")
 ggmap(manhattan, darken = 0.5) +
    scale_fill_viridis(option = 'plasma') +
    geom_bin2d(aes(x = long, y = lat),data = taxi, bins = 60, alpha = 0.6) +
-   labs(x="long",y="lat")
-   # .... YOUR CODE FOR TASK 4 .... 
+   labs(x="long",y="lat") 
 
 run_tests({
     
@@ -104,7 +100,6 @@ run_tests({
 
 
 # Loading in the tree package
-# .... YOUR CODE FOR TASK 5 HERE ....
 library(tree)
 
 # Fitting a tree to lat and long
@@ -113,7 +108,6 @@ fitted_tree <- tree(total ~lat+long, data = taxi)
 plot(fitted_tree)
 text(fitted_tree)
 # Draw a diagram of the tree structure
-# .... YOUR CODE FOR TASK 5 HERE ....
 
 run_tests({
     test_that("Test that tree is loaded", {
@@ -162,12 +156,10 @@ run_tests({
 fitted_tree <- tree(total ~ lat + long + hour + wday + month, data = taxi)
 
 # draw a diagram of the tree structure
-# .... YOUR CODE FOR TASK 7 HERE ....
 plot(fitted_tree)
 text(fitted_tree)
 
 # Summarizing the performance of the tree
-# .... YOUR CODE FOR TASK 7 HERE ....
 summary(fitted_tree)
 
 run_tests({
@@ -179,7 +171,6 @@ run_tests({
 })
 
 # Loading in the randomForest package
-# .... YOUR CODE FOR TASK 8 HERE ....
 library(randomForest)
 
 # Fitting a random forest
@@ -188,7 +179,6 @@ fitted_forest <- randomForest(total ~ lat + long + hour
                              ntree = 80, sampsize = 10000)
 
 # Printing the fitted_forest object
-# .... YOUR CODE FOR TASK 8 HERE ....
 summary(fitted_forest)
 
 run_tests({
@@ -212,8 +202,7 @@ run_tests({
 # Extracting the prediction from fitted_forest
 taxi$pred_total <- fitted_forest$predicted
 
-# Plotting the predicted mean trip prices from according to the random forest
-# .... COPY CODE FROM TASK 4 AND MODIFY HERE ....
+# Plotting the predicted mean trip prices from according to the random forest.
 ggmap(manhattan, darken = 0.5) +
    scale_fill_viridis(option = 'plasma') +
    stat_summary_2d(aes(x = long, y = lat, z = pred_total)
@@ -252,7 +241,6 @@ mean_if_enough_data <- function(x) {
 }
 
 # Plotting the mean trip prices from the data
-# .... COPY CODE FROM TASK 9 AND MODIFY HERE ....
 ggmap(manhattan, darken = 0.5) +
    scale_fill_viridis(option = 'plasma') +
    stat_summary_2d(aes(x = long, y = lat, z = total)
